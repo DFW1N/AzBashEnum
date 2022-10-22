@@ -1,16 +1,14 @@
 PREFIX = /usr
-MANDIR = $(PREFIX)/share/man
 
 all:
+	@echo Please ensure you run make with sudo privileges.
 	@echo Run \'make install\' to install AzBashEnum.
+	@echo Run \'make uninstall\' to uninstall AzBashEnum.
 
 install:
 		@mkdir -p $(DESTDIR)$(PREFIX)/bin
-		@mkdir -p $(DESTDIR)$(MANDIR)/man1
-		@cp -p azbashenum $(DESTDIR)$(PREFIX)/bin/azbashenum
-		@cp -p azbashenum.1 $(DESTDIR)$(MANDIR)/man1
-		@chmod 755 $(DESTDIR)$(PREFIX)/bin/azbashenum
+		@cp -p azbash $(DESTDIR)$(PREFIX)/bin/azbash
+		@chmod 755 $(DESTDIR)$(PREFIX)/bin/azbash
 
 uninstall:
-		@rm -rf $(DESTDIR)$(PREFIX)/bin/azbashenum
-		@rm -rf $(DESTDIR)$(MANDIR)/man1/azbashenum.1*
+		@rm -rf $(DESTDIR)$(PREFIX)/bin/azbash
