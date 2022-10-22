@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+#####################################################################
+#     ___        ____             __    ______                      #
+#    /   |____  / __ )____ ______/ /_  / ____/___  __  ______ ___   #
+#   / /| /_  / / __  / __ `/ ___/ __ \/ __/ / __ \/ / / / __ `__ \  #
+#  / ___ |/ /_/ /_/ / /_/ (__  ) / / / /___/ / / / /_/ / / / / / /  #
+# /_/  |_/___/_____/\__,_/____/_/ /_/_____/_/ /_/\__,_/_/ /_/ /_/   #
+#                                                                   #
+#              Author: Sacha Roussakis-Notter - 2022                #
+# ###################################################################
+
+# Copyright (c) 2022 Sacha Roussakis-Notter
+
+
+version=0.0.1
+
+bash_version=${BASH_VERSINFO[0]:-5}
+
+# Speed up script by not using unicode.
+LC_ALL=C
+LANG=C
+
+# DETECT INFORMATION
+
+get_os() {
+    # $kernel_name is set in a function called cache_uname and is
+    # just the output of "uname -s".
+    case $kernel_name in
+        Darwin)   os=$darwin_name ;;
+        SunOS)    os=Solaris ;;
+        Haiku)    os=Haiku ;;
+        MINIX)    os=MINIX ;;
+        AIX)      os=AIX ;;
+        IRIX*)    os=IRIX ;;
+        FreeMiNT) os=FreeMiNT ;;
+
+        Linux|GNU*)
+            os=Linux
+        ;;
+
+        *BSD|DragonFly|Bitrig)
+            os=BSD
+        ;;
+
+        CYGWIN*|MSYS*|MINGW*)
+            os=Windows
+        ;;
+
+        *)
+            printf '%s\n' "Unknown OS detected: '$kernel_name', aborting..." >&2
+            printf '%s\n' "Open an issue on GitHub to add support for your OS." >&2
+            exit 1
+        ;;
+    esac
+}
+
+main() {
+    get_os
+}
+
+main
